@@ -69,13 +69,16 @@ export default compose(
             name: 'Title'
         }, {
             key: 'difficulty',
-            name: 'Difficulty level for you'
+            name: 'Difficulty'
         }, {
             key: 'status',
             name: 'Performance'
         }, {
             key: 'timeUsed',
             name: 'Time Used'
+        }, {
+            key: 'studyIn',
+            name: 'Study in',
         }]
     })),
     withProps(props => ({

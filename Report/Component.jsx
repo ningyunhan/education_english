@@ -13,9 +13,11 @@ class Report extends Component {
         const user = this.props.currentUser;
         
         const divStyle = {
-          padding: "20px",
+          flex:'1',
+          flexDirection:'row-reverse',
+          flexWrap:'wrap',
         };        
-
+        console.log(this.props)        
         return (
             <Components.ShowIf
                 check={(currentUser, document) => !!currentUser}
@@ -38,25 +40,25 @@ class Report extends Component {
                                 }</p>}
                             </Col>
                             <Col md={1} mdOffset={5}>
-                                <h6 style={{width:'64px', textAlign:'right'}}><Trophy count={user.profile.trophy}/><div style={{textAlign:'center'}}>Lv.{user.profile && user.profile.level}</div></h6>
+                                <div>
+                                    <div style={{width:'64px',position:'absolute', right:'0px'}}>
+                                        <Trophy count={user.profile.trophy}/>
+                                        <div style={{textAlign:'center'}}>Lv.{user.profile && user.profile.level}</div>
+                                    </div>
+                                </div>
                                 {/*<h6 style={{textAlign:'center'}}>Lv.{user.profile && user.profile.level}</h6>*/}
                             </Col>
                         </Col>
                     </Row>
                     <Row>
-                        <Col sm={12} md={12}>
+                        <Col sm={12} md={12} style={divStyle}>
                             <Col md={12}>
                                 {this.props.overallProgress && <ProgressBar bsStyle="success" now={this.props.overallProgress} />}
+                                <h5 style={{textAlign:'right'}}>{`${Math.round(this.props.overallProgress * 10) / 10}%  Completed`}</h5>
                             </Col>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col sm={12} md={12}>
-                            <Col md={12}>{/*Improvement of style*/}
-                                <h5 style={{textAlign:'right'}}>{`${Math.round(this.props.overallProgress * 10) / 10}%  Completed`}</h5>                                        
-                            </Col>
-                        </Col>                                            
-                    </Row>
+                    <hr/>
                     <Row>
                         <Col sm={12} md={12}>
                             <Col md={6}>
@@ -68,23 +70,16 @@ class Report extends Component {
                                 />
                             </Col>
                             <Col md={6}>
-                                <ProgressAll/>
+                                <ProgressAll
+                                    amountAll={this.props.totalQuizedKnowledgeCount}
+                                />
                             </Col>                            
                         </Col>
                     </Row>
                     <hr />
                     <Row>
                         <Col sm={12} md={12}>
-                            <Col md={4} mdOffset={4}>
-                                <h2>Today's accomplishment</h2>
-                            </Col>
-                            <SwitchTab
-                                id={'studentReport'}
-                                firstTitle={<h3>{this.props.totalQuizedKnowledgeCount}<br /><Label bsStyle="success">Quized</Label></h3>}
-                                firstContent={<FilterTable tableHeads={this.props.quizRecordsTableHeads} tableContent={this.props.quizRecordsTableContent} />}
-                                secondTitle={<h3>{this.props.totalQuizedKnowledgeCount}<br /><Label bsStyle="primary">Posted</Label></h3>}
-                                thirdTitle={<h3>{this.props.totalQuizedKnowledgeCount}<br /><Label bsStyle="default">Commented</Label></h3>}
-                            />
+                            <FilterTable tableHeads={this.props.quizRecordsTableHeads} tableContent={this.props.quizRecordsTableContent} />
                         </Col>
                     </Row>
                 </div>}
